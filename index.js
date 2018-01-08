@@ -1,6 +1,5 @@
 const   express         = require('express'),
         app             = express(),
-        port            = 8000,
         mongoose        = require('mongoose'),
         shortId         = require('shortid'),
         validUrl        = require('valid-url');
@@ -18,7 +17,8 @@ const urlSchema = new Schema({
     url_number: Number,
 });
 let Url = mongoose.model('Url', urlSchema);
-
+const port = process.env.PORT || 8000;
+app.set('port', port);
 app.use(express.static( __dirname + '/views'));
 app.use(express.static( __dirname + '/scripts'));
 
@@ -26,7 +26,9 @@ mongoose.connect('mongodb://oskar:test123@ds245287.mlab.com:45287/url_shortener'
 db = mongoose.connection;
 db.on('error', console.error.bind(console,  'db connection error'));
 db.once('open', function () {
-    app.listen(port, () => console.log('Server running on: ', port));
+    app.listen(port, process.env.IP, function() {
+        console.log("connected: ", port); 
+     });
 });
 
 app.get('/', (req, res) => {
