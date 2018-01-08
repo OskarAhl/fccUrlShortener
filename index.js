@@ -22,7 +22,7 @@ let Url = mongoose.model('Url', urlSchema);
 app.use(express.static( __dirname + '/views'));
 app.use(express.static( __dirname + '/scripts'));
 
-mongoose.connect('mongodb://localhost:27017/url_parser', { useMongoClient: true });
+mongoose.connect('mongodb://oskar:test123@ds245287.mlab.com:45287/url_shortener', { useMongoClient: true });
 db = mongoose.connection;
 db.on('error', console.error.bind(console,  'db connection error'));
 db.once('open', function () {
@@ -67,7 +67,6 @@ app.post('/new/:url', (req, res) => {
                         short_url: newUrl.short_url
                     }
                 )
-                // res.send(`The shortened url is: ${newUrl.short_url}`);        
             }
         })
     } else {
