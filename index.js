@@ -56,7 +56,7 @@ app.post('/new/:url', (req, res) => {
         let randomNr = randomDigit();
         let newUrl = new Url({
             url: req.params.url,
-            short_url: 'http://localhost:8000/goto/' + randomNr,
+            short_url: 'https://whispering-earth-32324.herokuapp.com/goto/' + randomNr,
             url_number: randomNr,
         });
         newUrl.save(function(err, success) {
